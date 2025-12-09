@@ -1,13 +1,114 @@
-body {
+/* === Global Reset & Modern Base === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+  /* أفضل أداء على الموبايل */
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11'; /* أشكال أرقام وحروف أجمل */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  
+  /* أداء رسم أفضل + توفير بطارية */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  image-rendering: -webkit-optimize-contrast;
+
+  /* خلفية ناعمة وحديثة */
+  background: linear-gradient(135deg, #fffaf0 0%, #fff5f0 100%);
+  min-height: 100dvh;
+  color: #1a1a1a;
+background-color: #FFF3E0;
+  overscroll-behavior: none;
+}
+
+/* تحميل خط Inter (الأجمل حاليًا للويب) */
+@font-face {
+  font-family: 'Inter';
+  src: url('https://rs.gstatic.com/font/Inter/v18/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+/* للـ code والـ pre */
+code,
+pre,
+kbd,
+samp {
+  font-family: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-feature-settings: 'liga' 1, 'calt' 1; /* Ligatures للكود */
+  font-variant-ligatures: contextual;
+}
+
+/* تحسين عرض الكود داخل النصوص */
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  padding: 0.2em 0.4em;
+  background: rgba(255, 87, 34, 0.1);
+  color: #e64a19;
+  border-radius: 6px;
+  font-size: 0.9em;
+  font-weight: 600;
+}
+
+/* للـ pre (كود كبير) */
+pre {
+  padding: 1rem;
+  background: #0d1117;
+  color: #e6edf3;
+  border-radius: 12px;
+  overflow-x: auto;
+  border: 1px solid #30363d;
+}
+
+/* تحسين التحديد (Selection) */
+::selection {
+  background: #ff5722;
+  color: white;
+  text-shadow: none;
+}
+
+::-moz-selection {
+  background: #ff5722;
+  color: white;
+}
+
+/* تحسين الفوكس للـ inputs و buttons (Accessibility + جمال) */
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+  outline: 3px solid #ff5722;
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+/* تحسين الـ scrollbar (اختياري لكن فخم جدًا) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#ff8a65, #ff5722);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(#ff7043, #e64a19);
 }
