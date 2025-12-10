@@ -86,6 +86,10 @@ export default function ConfirmOrder() {
         <button onClick={handleDownloadPDF} style={{ background: "linear-gradient(45deg, #FF1744, #FF3D00)", color: "white", padding: "1rem 3rem", borderRadius: "60px", fontWeight: "700", fontSize: "1.3rem", cursor: "pointer", marginRight: "1rem" }}>
           Download PDF
         </button>
+        <br/>
+                <br/>
+        
+
         <Link to="/" style={{ background: "transparent", color: "#ff5722", border: "2px solid #ff5722", padding: "1rem 2.5rem", borderRadius: "60px", fontWeight: "700", textDecoration: "none" }}>
           Back to Home
         </Link>
