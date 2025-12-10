@@ -26,56 +26,24 @@ export default function Order() {
   });
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (cart.length === 0) return;
 
     setLoading(true);
 
-    const orderPayload = {
-      items: cart.map((i) => ({
-        _id: i._id,
-        name: i.name,
-        price: i.price,
-        img: i.img || "",
-        quantity: Number(i.quantity),
-      })),
-      customer: {
-        name: formData.name,
-        email: formData.email || null,
-        phone: formData.phone,
-        address: orderType === "Delivery" ? formData.address : "",
-      },
-      total: totalPrice,
-      type: orderType === "Dine In" ? "Dine In Reservation" : orderType,
-      notes: formData.notes || "",
-      dateTime: formData.dateTime || "",
-      guests: formData.guests || "",
-    };
-
-    try {
-      const res = await fetch("http://localhost:5000/orders", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(orderPayload),
+    // هنا الأوردر مش بيتبعت لأي باك‌اند
+    setTimeout(() => {
+      clearCart(); // تفريغ الكارت
+      navigate("/confirm-order", {
+        state: { 
+          order: { items: cart, total: totalPrice }, 
+          customer: formData, 
+          type: orderType 
+        },
       });
-
-      if (res.ok) {
-        const order = await res.json();
-        clearCart();
-        navigate("/confirm-order", {
-          state: { order, customer: formData, type: orderType },
-        });
-      } else {
-        const errorData = await res.json();
-        alert(`Failed to place order: ${errorData.message}`);
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Network error. Please try again.");
-    } finally {
       setLoading(false);
-    }
+    }, 500); // تحاكي وقت التحميل
   };
 
   if (cart.length === 0) {

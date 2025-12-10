@@ -14,7 +14,7 @@ export default function Home() {
   useEffect(() => {
     const fetchMeals = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/meals");
+        const res = await axios.get("/Data/meals.json");
         const data = res.data;
 
         setMeals(data);
