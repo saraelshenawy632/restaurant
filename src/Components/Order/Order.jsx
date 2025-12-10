@@ -32,18 +32,17 @@ export default function Order() {
 
     setLoading(true);
 
-    // هنا الأوردر مش بيتبعت لأي باك‌اند
     setTimeout(() => {
-      clearCart(); // تفريغ الكارت
+      clearCart();
       navigate("/confirm-order", {
-        state: { 
-          order: { items: cart, total: totalPrice }, 
-          customer: formData, 
-          type: orderType 
+        state: {
+          order: { items: cart, total: totalPrice },
+          customer: formData,
+          type: orderType,
         },
       });
       setLoading(false);
-    }, 500); // تحاكي وقت التحميل
+    }, 500);
   };
 
   if (cart.length === 0) {
@@ -52,11 +51,11 @@ export default function Order() {
         className="min-vh-100 d-flex align-items-center justify-content-center"
         style={{ backgroundColor: "#FFF3E0" }}
       >
-        <div className="text-center p-5">
+        <div className="text-center p-4">
           <h1
             style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: "5rem",
+              fontSize: "3rem",
               fontWeight: 900,
               color: "#5D4037",
             }}
@@ -72,12 +71,12 @@ export default function Order() {
               Empty
             </span>
           </h1>
-          <p className="fs-3 text-muted mb-5">
+          <p className="fs-5 text-muted mb-4">
             Let's add some delicious meals!
           </p>
           <Link
             to="/menu"
-            className="btn btn-lg px-5 py-3 rounded-pill fw-bold"
+            className="btn btn-lg px-4 py-2 rounded-pill fw-bold"
             style={{
               background: "linear-gradient(45deg, #FF1744, #FF3D00)",
               color: "white",
@@ -91,20 +90,21 @@ export default function Order() {
   }
 
   return (
-    <div className="container " style={{ backgroundColor: "#FFF3E0" }}>
+    <div className="container py-4" style={{ backgroundColor: "#FFF3E0" }}>
       <h1
-        className="text-center mb-5"
-        style={{ color: "#5D4037", fontWeight: 900 }}
+        className="text-center mb-4"
+        style={{ color: "#5D4037", fontWeight: 900, fontSize: "2.5rem" }}
       >
         Complete Your Order
       </h1>
 
-      <div className="card mb-5 p-4">
-        <h3 className="mb-4">Your Items ({totalItems})</h3>
+      {/* Cart Items */}
+      <div className="card mb-4 p-3">
+        <h3 className="mb-3">Your Items ({totalItems})</h3>
         {cart.map((item) => (
           <div
             key={item._id}
-            className="d-flex align-items-center justify-content-between mb-3 p-3"
+            className="d-flex flex-wrap align-items-center justify-content-between mb-3 p-2"
             style={{ background: "#FFF8F0", borderRadius: "12px" }}
           >
             <img
@@ -113,25 +113,28 @@ export default function Order() {
               style={{
                 width: "80px",
                 height: "80px",
-                borderRadius: "10px",
+                maxWidth: "20%",
                 objectFit: "cover",
+                borderRadius: "10px",
               }}
             />
-            <div className="flex-grow-1 ms-3">
-              <h5 className="mb-1">{item.name}</h5>
+            <div className="flex-grow-1 ms-3 me-3">
+              <h5 className="mb-1" style={{ fontSize: "1rem" }}>
+                {item.name}
+              </h5>
               <small>{item.price} EGP each</small>
             </div>
-            <div className="d-flex align-items-center gap-2">
+            <div className="d-flex align-items-center gap-2 mb-2">
               <button
                 onClick={() => decreaseQty(item._id)}
-                className="btn btn-outline-danger"
+                className="btn btn-outline-danger btn-sm"
               >
                 −
               </button>
               <span>{item.quantity}</span>
               <button
                 onClick={() => increaseQty(item._id)}
-                className="btn btn-danger"
+                className="btn btn-danger btn-sm"
               >
                 +
               </button>
@@ -142,24 +145,25 @@ export default function Order() {
               </p>
               <button
                 onClick={() => removeItem(item._id)}
-                className="btn btn-sm btn-link text-danger"
+                className="btn btn-sm btn-link text-danger p-0"
               >
                 Remove
               </button>
             </div>
           </div>
         ))}
-        <div className="text-end mt-3">
-          <h3>Total: {totalPrice} EGP</h3>
+        <div className="text-end mt-2">
+          <h4>Total: {totalPrice} EGP</h4>
         </div>
       </div>
 
-      <div className="text-center mb-4">
+      {/* Order Type */}
+      <div className="text-center mb-3">
         {["Delivery", "Pickup", "Dine In"].map((type) => (
           <button
             key={type}
             onClick={() => setOrderType(type)}
-            className={`btn mx-2 ${
+            className={`btn mx-1 my-1 ${
               orderType === type ? "btn-danger" : "btn-outline-danger"
             }`}
           >
@@ -168,11 +172,12 @@ export default function Order() {
         ))}
       </div>
 
-      <div className="card p-4">
-        <h3 className="mb-4">Your Information</h3>
+      {/* Customer Info */}
+      <div className="card p-3 mb-4">
+        <h3 className="mb-3">Your Information</h3>
         <form onSubmit={handleSubmit}>
-          <div className="row g-3">
-            <div className="col-md-6">
+          <div className="row g-2">
+            <div className="col-12 col-md-6">
               <input
                 type="text"
                 placeholder="Full Name *"
@@ -184,7 +189,7 @@ export default function Order() {
                 }
               />
             </div>
-            <div className="col-md-6">
+            <div className="col-12 col-md-6">
               <input
                 type="email"
                 placeholder="Email (optional)"
@@ -195,7 +200,7 @@ export default function Order() {
                 }
               />
             </div>
-            <div className="col-md-6">
+            <div className="col-12 col-md-6">
               <input
                 type="tel"
                 placeholder="Phone *"
@@ -208,7 +213,7 @@ export default function Order() {
               />
             </div>
             {orderType === "Delivery" && (
-              <div className="col-md-6">
+              <div className="col-12 col-md-6">
                 <input
                   type="text"
                   placeholder="Delivery Address *"
@@ -222,7 +227,7 @@ export default function Order() {
               </div>
             )}
             {(orderType === "Pickup" || orderType === "Dine In") && (
-              <div className="col-md-6">
+              <div className="col-12 col-md-6">
                 <input
                   type="datetime-local"
                   className="form-control"
@@ -234,7 +239,7 @@ export default function Order() {
               </div>
             )}
             {orderType === "Dine In" && (
-              <div className="col-md-6">
+              <div className="col-12 col-md-6">
                 <select
                   className="form-control"
                   value={formData.guests}
@@ -262,27 +267,20 @@ export default function Order() {
             </div>
           </div>
 
-          <div className="text-center mt-4">
+          <div className="text-center mt-3">
             <button
               type="submit"
               disabled={loading}
+              className="btn btn-danger"
               style={{
                 background: "linear-gradient(45deg, #FF1744, #FF3D00)",
                 color: "white",
-                padding: "1rem 3rem",
-                borderRadius: "60px",
-                fontWeight: "700",
-                fontSize: "1.3rem",
+                padding: "0.8rem 2.5rem",
+                borderRadius: "50px",
+                fontWeight: "600",
+                fontSize: "1.1rem",
                 cursor: loading ? "not-allowed" : "pointer",
-                boxShadow: "0 10px 25px rgba(255,23,68,0.4)",
-                transition: "all 0.3s ease",
               }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.transform = loading
-                  ? "none"
-                  : "translateY(-3px) scale(1.02)")
-              }
-              onMouseLeave={(e) => (e.currentTarget.style.transform = "none")}
             >
               {loading
                 ? "Placing Order..."

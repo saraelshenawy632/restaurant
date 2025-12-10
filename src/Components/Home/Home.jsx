@@ -16,22 +16,15 @@ export default function Home() {
       try {
         const res = await axios.get("/Data/meals.json");
         const data = res.data;
-
         setMeals(data);
-
         setFeatured(
-          data.slice(0, 6).map((meal, index) => ({
-            ...meal,
-            best: index < 3,
-          }))
+          data.slice(0, 6).map((meal, index) => ({ ...meal, best: index < 3 }))
         );
       } catch (err) {
         console.error("Error fetching meals:", err);
       }
     };
-
     fetchMeals();
-
     setTimeout(() => window.dispatchEvent(new Event("resize")), 100);
   }, []);
 
@@ -39,20 +32,40 @@ export default function Home() {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
     pauseOnHover: true,
     arrows: true,
-    cssEase: "ease-in-out",
+    centerMode: true,
+    centerPadding: "20%", 
+    cssEase: "cubic-bezier(0.645, 0.045, 0.355, 1)",
+
     responsive: [
-      { breakpoint: 1200, settings: { slidesToShow: 3 } },
-      { breakpoint: 992, settings: { slidesToShow: 2 } },
-      { breakpoint: 768, settings: { slidesToShow: 1 } },
+      {
+        breakpoint: 992,
+        settings: {
+          centerPadding: "15%",
+          arrows: true,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          centerPadding: "10%",
+          arrows: false,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          centerPadding: "5%",
+          arrows: false,
+        },
+      },
     ],
   };
-
   return (
     <>
       <section className="hero-section">
@@ -92,7 +105,7 @@ export default function Home() {
             <h2 className="slider-title text-center mb-5">Featured Meals</h2>
             <Slider {...sliderSettings}>
               {featured.map((dish) => (
-                <div key={dish._id} className="px-3">
+                <div key={dish._id} className="px-2">
                   <DishCard
                     _id={dish._id}
                     name={dish.name}
@@ -115,7 +128,7 @@ export default function Home() {
             Choose your favorite dishes
           </p>
 
-          <div className="row g-5 justify-content-center">
+          <div className="row g-4 justify-content-center">
             {meals.map((dish) => (
               <div
                 key={dish._id}
@@ -143,7 +156,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       <section className="reviews-section py-5">
         <div className="container">
           <h2 class="hero-title text-center">

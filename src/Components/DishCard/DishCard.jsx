@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import { useCart } from "../../CartContext/CartContext";
 import toast from "react-hot-toast";
 
@@ -9,7 +8,6 @@ export default function DishCard({ _id, name, price, img, description = "", best
 
   const handleAdd = () => {
     addToCart({ _id, name, price, img, description });
-
     toast.success(`${name} added to cart!`, {
       position: "top-center",
       duration: 1500,
@@ -40,7 +38,6 @@ export default function DishCard({ _id, name, price, img, description = "", best
           style={{ height: "200px", objectFit: "cover" }}
           onError={(e) => (e.target.src = "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=1200")}
         />
-
         {best && (
           <div className="position-absolute top-0 start-0 bg-danger text-white px-3 py-1 rounded-bottom-end rounded-top-start fw-bold small">
             Best Seller
@@ -50,13 +47,10 @@ export default function DishCard({ _id, name, price, img, description = "", best
 
       <div className="p-3">
         <h3 className="fs-5 fw-bold text-[#5D4037] mb-1">{name}</h3>
-
         {description && (
           <p className="text-muted mb-2 small line-clamp-2">{description}</p>
         )}
-
         <p className="fs-4 fw-black text-danger mb-3">{price} EGP</p>
-
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
